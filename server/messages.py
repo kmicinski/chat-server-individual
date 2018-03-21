@@ -13,7 +13,7 @@ class JoinMessage(Message):
         self.channel = channel
 
     def render(self):
-        "join {}".format(channel)
+        return "join {}".format(self.channel)
 
 class UpdatePasswordMessage(Message):
     def __init__(self,newpassword):
@@ -50,7 +50,7 @@ class GetTopicMessage(Message):
         self.channel = channel
 
     def render(self):
-        "gettopic {}".format(self.channel)
+        return "gettopic {}".format(self.channel)
 
 class SetTopicMessage(Message):
     def __init__(self,channel,topic):
@@ -58,7 +58,7 @@ class SetTopicMessage(Message):
         self.topic = topic
 
     def render(self):
-        "settopic {} {}".format(self.channel,self.topic)
+        return "settopic {} {}".format(self.channel,self.topic)
 
 class TopicMessage(Message):
     def __init__(self,channel,topic):
@@ -66,8 +66,14 @@ class TopicMessage(Message):
         self.topic = topic 
 
     def render(self):
-        "topic {} {}".format(self.channel,self.topic)
-    
+        return "topic {} {}".format(self.channel,self.topic)
+
+    def __eq__(self,other):
+        return self.channel == other.channel and self.topic == other.topic
+
+    def __ne__(self,other): 
+        return not self.__eq__(other)
+
 class AuthenticateMessage(Message):
     def __init__(self,username,password):
         self.username = username

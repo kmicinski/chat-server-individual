@@ -21,5 +21,7 @@ class Parser():
             return ErrorMessage(msg[0],msg[1])
         elif split[0] == "join":
             return JoinCommand(split[1])
+        elif split[0] == "topic":
+            return TopicMessage(split[1],string.split(2)[2])
         else:
             raise Exception("Could not parse packet")
