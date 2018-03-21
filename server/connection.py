@@ -14,6 +14,6 @@ class Connection(Thread):
     def run(self):
         print("Initiated connection to a client!!!")
         print("Now I just have to do the rest :(")
-        while true:
+        while True:
             data = self.conn.recv(self.PACKET_LENGTH)
             # Do something with the data here..
