@@ -75,6 +75,12 @@ class TopicMessage(Message):
     def render(self):
         m = "topic {} {}".format(self.channel,self.topic)
         return m.encode()
+
+    def __eq__(self,other):
+        return self.channel == other.channel and self.topic == other.topic
+
+    def __ne__(self,other): 
+        return not self.__eq__(other)
     
 class AuthenticateMessage(Message):
     def __init__(self,username,password):
@@ -84,12 +90,6 @@ class AuthenticateMessage(Message):
     def render(self):
         m = "authenticate {} {}".format(username, password)
         return m.encode()
-
-    def __eq__(self,other):
-        return self.channel == other.channel and self.topic == other.topic
-
-    def __ne__(self,other): 
-        return not self.__eq__(other)
 
 class RegisterMessage(Message):
     def __init__(self,username,password):
